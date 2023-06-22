@@ -4,11 +4,11 @@ import random
 import math
 no=random.randint(1,3)
 
-inp=st.number_input("Hey Please enter the number")
 You=0
 Computer=0
 while(True):
     if(inp==0):
+        inp=st.number_input("Hey Please enter the number")
         st.markdown("Thanks For Playing the Game")
         st.markdown("Here is score")
         st.markdown(You)
