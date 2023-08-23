@@ -1,41 +1,49 @@
 import streamlit as st
-st.write("=================== Welcome to Snake Water Gun Game =================")
 import random
-import math
-no=random.randint(1,3)
 
-You=0
-Computer=0
-while(True):
-    inp=st.number_input("Hey Please enter the number",min_value=1,max_value=5)
-    if(inp==5):
-        st.markdown("Thanks For Playing the Game")
-        st.markdown("Here is score")
-        st.markdown(You)
-        st.markdown("Here is Computer score")
-        st.markdown(Computer)
-        break;
-    elif(no==inp):
-        st.markdown("Draw")
-    elif(no==1):
-        if(inp==2):
-            st.markdown("You Lost")
-            Computer+=1
-        else:
-            st.markdown("You Won")
-            You+=1
-    elif(no==2):
-        if(inp==1):
-            st.markdown("You Won")
-            You+=1
-        else:
-            st.markdown("You Lost")
-            Computer+=1
-    elif(no==3):
-        if(inp==1):
-            st.markdown("You Lost")
-            Computer+=1
-        else:
-            st.markdown("You Won")
-            You+=1
+def get_game_result(user_choice, computer_choice):
+    if user_choice == computer_choice:
+        return "Draw"
+    elif (user_choice == "Snake" and computer_choice == "Water") or (user_choice == "Water" and computer_choice == "Gun") or (user_choice == "Gun" and computer_choice == "Snake"):
+        return "You Win"
+    else:
+        return "Computer Wins"
+
+def main():
+    st.title("Snake Water Gun Game")
+    
+    # Initialize score and game history
+    user_score = 0
+    computer_score = 0
+    game_history = []
+    user_choice = st.radio("Your Choice", ["Snake", "Water", "Gun"])
+    c=1
+    while st.button("Play",key=c):
+        computer_choice = random.choice(["Snake", "Water", "Gun"])
+        result = get_game_result(user_choice, computer_choice)
+        game_history.append((user_choice, computer_choice, result))
             
+        if result == "You Win":
+            user_score += 1
+        elif result == "Computer Wins":
+            computer_score += 1
+        st.write(f"Result: {result}")
+        # st.write(f"You chose: {user_choice}")
+        # st.write(f"Computer chose: {computer_choice}")
+        
+        
+        # st.write("Current Score:")
+        # st.write(f"You: {user_score}")
+        # st.write(f"Computer: {computer_score}")
+        
+        # st.write("Game History:")
+        # for user, computer, result in game_history:
+        #     st.write(f"You: {user} - Computer: {computer} - Result: {result}")
+        
+        st.write("---")
+        c+=1 
+       
+        
+        
+if __name__ == "__main__":
+    main()
