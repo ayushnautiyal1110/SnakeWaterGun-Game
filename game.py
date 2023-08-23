@@ -16,7 +16,7 @@ def main():
     user_score = 0
     computer_score = 0
     game_history = []
-    user_choice = st.radio("Your Choice", ["Snake", "Water", "Gun"])
+    user_choice = st.radio("Select your Choice", ["Snake", "Water", "Gun"])
     c=1
     while st.button("Play",key=c):
         computer_choice = random.choice(["Snake", "Water", "Gun"])
